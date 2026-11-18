@@ -107,47 +107,45 @@
   acta.href = wa(`¡Hola ${A.contactoNombre}! Quiero info del ${A.curso} (IAAF) en GIM Adrogué. ${A.fechaInicio ? inicio + "." : "¿Cuándo es la próxima fecha de inicio?"}`, A.contactoWhatsapp);
   $("span", acta).textContent = `Inscribite con ${A.contactoNombre}`;
 
-  // ---------- Tienda ----------
+  // ---------- Tienda (afiches oficiales, se muestran completos) ----------
   const T = C.tienda;
-  $("#tienda-categorias").innerHTML = T.categorias
-    .map((c) => `
-      <article class="card shop-card reveal">
-        <img src="${esc(c.foto)}" alt="${esc(c.nombre)}" width="700" height="525" loading="lazy">
-        <div class="shop-card__body">
-          <h3>${esc(c.nombre)}</h3>
-          <p>${esc(c.texto)}</p>
-          <a class="btn btn--primary btn--sm" href="${wa(`¡Hola! Quiero consultar por ${c.nombre} en GIM Adrogué.`)}" target="_blank" rel="noopener" aria-label="Consultar por ${esc(c.nombre)} por WhatsApp">${waIcon} Consultar por WhatsApp</a>
+  const catDe = (id) => T.categorias.find((c) => c.id === id) || {};
+  const precioDe = (p) => (p.precioVigente !== "" && p.precioVigente != null && !isNaN(Number(p.precioVigente)) ? Number(p.precioVigente) : null);
+  const msjProducto = (p) => { const pv = precioDe(p); return `¡Hola! Quiero consultar por ${p.nombre} del GIM.${pv ? ` (Vi en la web ${precio(pv)})` : ""}`; };
+  const thumbDe = (src) => src.replace(/\.webp$/, "-thumb.webp");
+  let filtroTienda = "todo";
+  const visibles = () => T.productos.filter((p) => filtroTienda === "todo" || p.categoria === filtroTienda);
+  $("#tienda-filtros").innerHTML = [{ id: "todo", filtro: "Todo" }, ...T.categorias]
+    .map((c) => `<button type="button" class="chip${c.acento ? " chip--acento" : ""}" data-filtro="${c.id}" aria-pressed="${c.id === filtroTienda}" ${c.acento ? `style="--acento:${esc(c.acento)}"` : ""}>${esc(c.filtro)}</button>`).join("");
+  $("#tienda-aviso").textContent = T.productos.some((p) => p.conPrecio) ? T.avisoPrecios : "";
+  function pintarTienda() {
+    $("#tienda-grid").innerHTML = visibles().map((p, i) => {
+      const c = catDe(p.categoria), pv = precioDe(p), alto = Math.round((p.alto / p.ancho) * 560);
+      return `<article class="poster${c.acento ? " poster--acento" : ""}" ${c.acento ? `style="--acento:${esc(c.acento)}"` : ""}>
+        <button type="button" class="poster__img" data-ver="${i}" aria-label="Ampliar afiche: ${esc(p.nombre)}">
+          <img src="${esc(thumbDe(p.imagen))}" alt="${esc(p.alt)}" width="560" height="${alto}" loading="lazy" decoding="async">
+        </button>
+        <div class="poster__body">
+          <span class="poster__cat">${esc(c.nombre || "")}</span>
+          <h3>${esc(p.nombre)}</h3>
+          ${pv ? `<p class="poster__precio">${precio(pv)}</p>` : ""}
+          ${p.conPrecio ? `<p class="poster__aviso">${esc(T.avisoPrecios)}</p>` : ""}
+          <a class="btn btn--primary btn--sm poster__cta" href="${wa(msjProducto(p))}" target="_blank" rel="noopener" aria-label="Consultar por ${esc(p.nombre)} por WhatsApp">${waIcon} Consultar por WhatsApp</a>
         </div>
-      </article>`)
-    .join("");
-
-  if (T.productos.length) {
-    const cat = $("#catalogo");
-    cat.hidden = false;
-    const nombreCat = (id) => (T.categorias.find((c) => c.id === id) || {}).nombre || id;
-    const usadas = [...new Set(T.productos.map((p) => p.categoria))];
-    const filtros = $("#catalogo-filtros");
-    filtros.innerHTML = ["todos", ...usadas].map((id, i) => `<button class="chip" data-cat="${esc(id)}" aria-pressed="${i === 0}">${id === "todos" ? "Todos" : esc(nombreCat(id))}</button>`).join("");
-    const pintar = (f) => {
-      $("#catalogo-grid").innerHTML = T.productos
-        .filter((p) => f === "todos" || p.categoria === f)
-        .map((p) => `
-          <article class="card shop-card">
-            ${p.foto ? `<img src="${esc(p.foto)}" alt="${esc(p.nombre)}" width="700" height="525" loading="lazy">` : ""}
-            <div class="shop-card__body">
-              <h3>${esc(p.nombre)}</h3>
-              ${p.precio ? `<div class="precio">${precio(p.precio)}</div>` : ""}
-              <a class="btn btn--primary btn--sm" href="${wa(`¡Hola! Quiero consultar por ${p.nombre}${p.precio ? " (" + precio(p.precio) + ")" : ""} en GIM Adrogué.`)}" target="_blank" rel="noopener">${waIcon} Consultar</a>
-            </div>
-          </article>`).join("");
-    };
-    filtros.addEventListener("click", (e) => {
-      const b = e.target.closest(".chip"); if (!b) return;
-      $$(".chip", filtros).forEach((x) => x.setAttribute("aria-pressed", x === b));
-      pintar(b.dataset.cat);
-    });
-    pintar("todos");
+      </article>`;
+    }).join("");
   }
+  $("#tienda-filtros").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-filtro]"); if (!b) return;
+    filtroTienda = b.dataset.filtro;
+    $$("[data-filtro]").forEach((x) => x.setAttribute("aria-pressed", x === b));
+    pintarTienda();
+  });
+  $("#tienda-grid").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-ver]"); if (!b) return;
+    abrirLightbox(visibles().map((p) => ({ src: p.imagen, alt: p.alt, producto: p })), +b.dataset.ver);
+  });
+  pintarTienda();
 
   // ---------- Equipo ----------
   const iniciales = (n) => /confirmar/i.test(n) ? "GIM" : n.replace(/^Lic\.\s*/i, "").split(/\s+/).map((w) => w[0]).slice(0, 2).join("").toUpperCase();
@@ -160,13 +158,25 @@
       </article>`)
     .join("");
 
-  // ---------- Galería + lightbox ----------
+  // ---------- Galería + lightbox (compartido con la tienda) ----------
   const G = C.galeria;
-  $("#gallery").innerHTML = G.map((g, i) => `<button type="button" data-i="${i}" class="reveal" aria-label="Ampliar foto: ${esc(g.alt)}"><img src="${esc(g.thumb || g.src)}" alt="${esc(g.alt)}" width="600" height="450" loading="lazy"></button>`).join("");
-  const lb = $("#lightbox"), lbImg = $("#lightbox-img");
-  let actual = 0;
-  const mostrar = (i) => { actual = (i + G.length) % G.length; lbImg.src = G[actual].src; lbImg.alt = G[actual].alt; };
-  $("#gallery").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; mostrar(+b.dataset.i); lb.showModal(); });
+  $("#gallery").innerHTML = G.map((g, i) => `<button type="button" data-i="${i}" class="reveal${g.forma ? " g--" + g.forma : ""}" aria-label="Ampliar foto: ${esc(g.alt)}"><img src="${esc(g.thumb || g.src)}" alt="${esc(g.alt)}" width="${g.ancho || 600}" height="${g.alto || 800}" loading="lazy" decoding="async"></button>`).join("");
+  const lb = $("#lightbox"), lbImg = $("#lightbox-img"), lbBar = $("#lightbox-bar");
+  let lista = [], actual = 0;
+  function mostrar(i) {
+    actual = (i + lista.length) % lista.length;
+    const it = lista[actual];
+    lbImg.src = it.src; lbImg.alt = it.alt;
+    if (it.producto) {
+      const p = it.producto, pv = precioDe(p);
+      lbBar.hidden = false;
+      lbBar.innerHTML = `<strong>${esc(p.nombre)}</strong>${pv ? ` <span class="poster__precio">${precio(pv)}</span>` : ""}${p.conPrecio ? `<small>${esc(T.avisoPrecios)}</small>` : ""}
+        <a class="btn btn--primary btn--sm" href="${wa(msjProducto(p))}" target="_blank" rel="noopener">${waIcon} Consultar por WhatsApp</a>`;
+    } else { lbBar.hidden = true; lbBar.innerHTML = ""; }
+    lb.setAttribute("aria-label", it.producto ? `Afiche ampliado: ${it.producto.nombre}` : "Foto ampliada");
+  }
+  function abrirLightbox(items, i) { lista = items; mostrar(i); lb.showModal(); }
+  $("#gallery").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; abrirLightbox(G, +b.dataset.i); });
   $("[data-prev]", lb).addEventListener("click", () => mostrar(actual - 1));
   $("[data-next]", lb).addEventListener("click", () => mostrar(actual + 1));
   $("[data-close]", lb).addEventListener("click", () => lb.close());

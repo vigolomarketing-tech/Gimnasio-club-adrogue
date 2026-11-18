@@ -90,22 +90,39 @@ const CONFIG = {
     nota: "Cupos limitados",
     contactoNombre: "Mauro",
     contactoWhatsapp: "5491151082937",
-    foto: "img/academia.webp",
+    foto: "img/galeria-pesas.webp",
   },
 
   tienda: {
     titulo: "Sport Shop",
     texto: "Todo lo que necesitás para entrenar y recuperarte, en el mismo gimnasio. Consultá stock y precios por WhatsApp.",
+    avisoPrecios: "Precios sujetos a cambios, consultá por WhatsApp.",
+    // filtro = texto del botón de filtro. acento = color puntual de la categoría (el celeste sigue siendo la marca).
     categorias: [
-      { id: "equipamiento", nombre: "Sport Gear – Equipamiento", texto: "Mochilas, shakers, protectores y accesorios para entrenar.", foto: "img/tienda-equipamiento.webp" },
-      { id: "cintas", nombre: "Cintas – Sport Tape", texto: "Cintas para taping deportivo y kinesiológico.", foto: "img/tienda-cintas.webp" },
-      { id: "recovery", nombre: "Recovery – Liberación miofascial", texto: "Rodillos, pistolas de masaje y todo para recuperarte mejor.", foto: "img/tienda-recovery.webp" },
-      { id: "nutricion", nombre: "Sport Nutrition", texto: "Creatinas, whey protein y suplementos deportivos.", foto: "img/tienda-nutricion.webp" },
+      { id: "nutricion", nombre: "Sport Nutrition", filtro: "Nutrición", texto: "Proteínas, creatinas, pre-entrenos, barritas y geles.", acento: "#B6F000" },
+      { id: "recovery", nombre: "Recovery", filtro: "Recovery", texto: "Rodillos, pistola de masaje y liberación miofascial." },
+      { id: "cintas", nombre: "Cintas – Sport Tape", filtro: "Cintas", texto: "Taping deportivo y kinesiológico." },
+      { id: "equipamiento", nombre: "Sport Gear – Equipamiento", filtro: "Equipamiento", texto: "Mochilas, shakers, botellas y protectores." },
     ],
-    // Vacío a propósito: no hay precios confirmados. Si se cargan productos,
-    // la web arma el catálogo solo. Ejemplo de formato:
-    // { categoria: "nutricion", nombre: "Creatina monohidrato 300 g", precio: 25000, foto: "img/creatina.webp" },
-    productos: [],
+    // Cada producto es un afiche oficial del GIM (se muestra completo, sin recortar).
+    // precioVigente: los afiches marcados con conPrecio traen un precio impreso que puede quedar viejo.
+    //   Dejalo vacío ("") para no mostrar precio, o poné el número actual (ej. 24000) y la web lo muestra como $ 24.000.
+    productos: [
+      { id: "suplementos-pre-entreno", categoria: "nutricion", nombre: "Suplementos y pre-entrenos", alt: "Afiche de suplementos que impulsan: pre-entrenos, colágeno y suplementos deportivos en la tienda del GIM", imagen: "img/suplementos-pre-entreno.webp", ancho: 1125, alto: 1450 },
+      { id: "proteina-en-polvo", categoria: "nutricion", nombre: "Proteína en polvo Granger", alt: "Afiche de proteína en polvo Granger: pancakes y puré proteico, nutrición que te acompaña", imagen: "img/proteina-en-polvo.webp", ancho: 1125, alto: 1500, conPrecio: true, precioVigente: "" }, // PENDIENTE CLIENTE: precio vigente
+      { id: "barritas-geles", categoria: "nutricion", nombre: "Barritas y geles energéticos", alt: "Afiche de barritas proteicas y geles energéticos disponibles en el GIM", imagen: "img/barritas-geles.webp", ancho: 1125, alto: 1500 },
+      { id: "proteinas-whey", categoria: "nutricion", nombre: "Proteínas whey", alt: "Afiche de proteínas whey: más fuerza, más músculo y mejor recuperación", imagen: "img/proteinas-whey.webp", ancho: 1125, alto: 1500 },
+      { id: "creatinas", categoria: "nutricion", nombre: "Creatinas", alt: "Afiche de creatinas monohidrato para fuerza, potencia y rendimiento", imagen: "img/creatinas.webp", ancho: 1125, alto: 1500 },
+      { id: "recovery", categoria: "recovery", nombre: "Recovery: rodillos y pistola de masaje", alt: "Afiche de recovery: rodillos de liberación miofascial y mini pistola de masaje", imagen: "img/recovery.webp", ancho: 1125, alto: 1125 },
+      { id: "sport-tape", categoria: "cintas", nombre: "Sport Tape d3", alt: "Afiche de cinta deportiva d3 Sport Tape para vendaje funcional de tobillo, mano y rodilla", imagen: "img/sport-tape.webp", ancho: 1125, alto: 1651 },
+      { id: "kinesio-taping", categoria: "cintas", nombre: "Kinesio taping K5.0", alt: "Afiche de cinta kinesiológica K5.0 para kinesio taping", imagen: "img/kinesio-taping.webp", ancho: 1125, alto: 1652 },
+      { id: "d3-sportplast", categoria: "cintas", nombre: "d3 Sportplast", alt: "Afiche de d3 Sportplast, cinta rígida para estribos más firmes en vendajes", imagen: "img/d3-sportplast.webp", ancho: 1125, alto: 1625 },
+      { id: "d3-lighrip", categoria: "cintas", nombre: "d3 Lighrip", alt: "Afiche de d3 Lighrip, venda elástica de cierre seguro para vendajes", imagen: "img/d3-lighrip.webp", ancho: 1125, alto: 1641 },
+      { id: "promo-line-out", categoria: "cintas", nombre: "Promo Line Out", alt: "Afiche de la promo Line Out: cinta d3 más cinta aisladora en 7,5 y 10 cm", imagen: "img/promo-line-out.webp", ancho: 1125, alto: 1458, conPrecio: true, precioVigente: "" }, // PENDIENTE CLIENTE: precio vigente
+      { id: "promo-athletic-tape", categoria: "cintas", nombre: "Promo Athletic Sports Tape", alt: "Afiche de la promo Athletic Sports Tape, pack de 4 rollos de cinta deportiva", imagen: "img/promo-athletic-tape.webp", ancho: 1125, alto: 1350, conPrecio: true, precioVigente: "" }, // PENDIENTE CLIENTE: precio vigente
+      { id: "equipamiento", categoria: "equipamiento", nombre: "Equipamiento para entrenar", alt: "Afiche de equipamiento: mochila Quechua, shaker, protector bucal y tijera kinesiológica", imagen: "img/equipamiento.webp", ancho: 1125, alto: 1457, conPrecio: true, precioVigente: "" }, // PENDIENTE CLIENTE: precio vigente
+      { id: "botellas", categoria: "equipamiento", nombre: "Botellas y shakers", alt: "Afiche de botellas y shakers con el sello del Club Atlético Adrogué", imagen: "img/botellas.webp", ancho: 1125, alto: 1350 },
+    ],
   },
 
   // Si "foto" queda vacío se muestran las iniciales.
@@ -117,17 +134,15 @@ const CONFIG = {
   equipoTexto:
     "Un equipo de profes y kinesiología que te acompaña en cada entrenamiento. Y seguimos creciendo: pronto sumamos más servicios de kinesiología para los socios.",
 
-  // PENDIENTE CLIENTE: fotos de stock provisorias (Unsplash). Reemplazar por fotos del GIM
-  // (instalaciones, pesas, zona funcional, cajón GIM, fachada celeste) con los mismos nombres o cambiando la ruta.
+  // Fotos oficiales del GIM (las 5 salen del collage; el collage completo va primero).
   galeria: [
-    { src: "img/galeria-sala-musculacion.webp", thumb: "img/galeria-sala-musculacion-thumb.webp", alt: "Sala de musculación con máquinas y bancos" },
-    { src: "img/galeria-rack-sentadillas.webp", thumb: "img/galeria-rack-sentadillas-thumb.webp", alt: "Rack de sentadillas y discos de pesas" },
-    { src: "img/galeria-zona-funcional.webp", thumb: "img/galeria-zona-funcional-thumb.webp", alt: "Entrenamiento funcional con sogas de batalla" },
-    { src: "img/galeria-mancuernas.webp", thumb: "img/galeria-mancuernas-thumb.webp", alt: "Mancuernas en el soporte" },
-    { src: "img/galeria-sentadilla.webp", thumb: "img/galeria-sentadilla-thumb.webp", alt: "Socia haciendo sentadilla con barra" },
-    { src: "img/galeria-salon-amplio.webp", thumb: "img/galeria-salon-amplio-thumb.webp", alt: "Salón amplio de entrenamiento" },
-    { src: "img/galeria-peso-muerto.webp", thumb: "img/galeria-peso-muerto-thumb.webp", alt: "Levantamiento de peso muerto con barra" },
-    { src: "img/galeria-entrenamiento-fuerza.webp", thumb: "img/galeria-entrenamiento-fuerza-thumb.webp", alt: "Socio entrenando fuerza con barra" },
+    // forma: "ancho" ocupa 2 columnas, "alto" ocupa 2 filas (solo cambia la miniatura; el lightbox muestra la foto entera)
+    { src: "img/galeria-fachada.webp", thumb: "img/galeria-fachada-thumb.webp", alt: "Fachada celeste del Club Atlético Adrogué en Seguí 886", ancho: 548, alto: 420, forma: "ancho" },
+    { src: "img/gimnasio-collage.webp", thumb: "img/gimnasio-collage-thumb.webp", alt: "Collage del GIM: fachada celeste del Club Atlético Adrogué, pesas, zona funcional, cajón GIM y una socia entrenando", ancho: 1125, alto: 1902, forma: "alto" },
+    { src: "img/galeria-pesas.webp", thumb: "img/galeria-pesas-thumb.webp", alt: "Discos de pesas y plataforma en la sala de musculación", ancho: 525, alto: 840 },
+    { src: "img/galeria-funcional.webp", thumb: "img/galeria-funcional-thumb.webp", alt: "Zona funcional con bolsas de entrenamiento y pesas rusas", ancho: 330, alto: 680 },
+    { src: "img/galeria-cajon-gim.webp", thumb: "img/galeria-cajon-gim-thumb.webp", alt: "Cajón de saltos de madera con el logo GIM Club Atlético Adrogué", ancho: 296, alto: 690 },
+    { src: "img/galeria-socia-entrenando.webp", thumb: "img/galeria-socia-entrenando-thumb.webp", alt: "Socia entrenando en la sala del GIM", ancho: 270, alto: 780 },
   ],
 
   // PENDIENTE CLIENTE: opiniones DE EJEMPLO. Reemplazar por reseñas reales de Google antes de publicar.
