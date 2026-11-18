@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gimnasio en Adrogué | GIM Club Atlético Adrogué</title>
+  <meta name="description" content="Gimnasio en Adrogué, a pasos de la estación. Entrenamiento 100% personalizado, ambiente climatizado y kinesiología. Consultá por WhatsApp y probá una clase.">
+  <meta name="theme-color" content="#0b0d10">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:site_name" content="GIM – Club Atlético Adrogué">
+  <meta property="og:title" content="GIM – Gimnasio Club Atlético Adrogué">
+  <meta property="og:description" content="Entrená. Mejorá. Rendí. Entrenamiento personalizado y kinesiología en Seguí 886, Adrogué.">
+  <meta property="og:url" content="https://vigolomarketing-tech.github.io/Gimnasio-club-adrogue/">
+  <meta property="og:image" content="https://vigolomarketing-tech.github.io/Gimnasio-club-adrogue/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+  <link rel="preload" href="fonts/barlow-condensed-latin-800-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="img/hero-mobile.webp" as="image" media="(max-width: 767px)">
+  <link rel="preload" href="img/hero.webp" as="image" media="(min-width: 768px)">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <!-- 1. Header -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#inicio" class="brand" aria-label="GIM – Club Atlético Adrogué, ir al inicio" data-logo></a>
+      <nav class="nav" id="nav" aria-label="Principal">
+        <ul class="nav__list">
+          <li><a href="#entrena">Entrená</a></li>
+          <li><a href="#academia">Academia</a></li>
+          <li><a href="#tienda">Tienda</a></li>
+          <li><a href="#horarios">Horarios</a></li>
+          <li><a href="#ubicacion">Ubicación</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <a class="btn btn--primary nav__cta" data-wa target="_blank" rel="noopener">Escribinos</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- 2. Hero -->
+    <section class="hero" id="inicio">
+      <picture>
+        <source media="(min-width: 768px)" srcset="img/hero.webp">
+        <img class="hero__bg" src="img/hero-mobile.webp" alt="" width="800" height="1200" fetchpriority="high">
+      </picture>
+      <div class="container hero__content">
+        <p class="eyebrow" data-text="negocio.localidad">Adrogué</p>
+        <h1 class="hero__title">Entrená. <span>Mejorá.</span> Rendí.</h1>
+        <p class="hero__sub" data-text="negocio.subtitulo"></p>
+        <ul class="badges" id="hero-badges"></ul>
+        <div class="hero__ctas">
+          <a class="btn btn--primary btn--lg" data-wa="¡Hola! Quiero probar una clase en GIM Adrogué." target="_blank" rel="noopener">
+            <svg class="i" aria-hidden="true"><use href="#i-wa"/></svg> Probá una clase
+          </a>
+          <a class="btn btn--ghost btn--lg" href="#entrena">Ver servicios</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Datos rápidos -->
+    <section class="quick" aria-label="Datos rápidos">
+      <div class="container quick__grid">
+        <div class="quick__item">
+          <svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>
+          <div><span class="status" id="status">Horario</span><strong id="hoy"></strong></div>
+        </div>
+        <a class="quick__item" data-maps target="_blank" rel="noopener">
+          <svg class="i" aria-hidden="true"><use href="#i-pin"/></svg>
+          <div><span>Dirección</span><strong data-text="contacto.direccion"></strong></div>
+        </a>
+        <a class="quick__item" data-wa target="_blank" rel="noopener">
+          <svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>
+          <div><span>WhatsApp</span><strong data-text="contacto.telefono"></strong></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 4. Servicios -->
+    <section class="section" id="entrena">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Entrená</p>
+          <h2>Un plan para cada objetivo</h2>
+          <p>Entrenamiento 100% personalizado, en todos los horarios y todos los días. Elegí por dónde arrancar.</p>
+        </header>
+        <div class="grid grid--3" id="servicios"></div>
+        <div class="stats" id="stats"></div>
+      </div>
+    </section>
+
+    <!-- 5. Academia -->
+    <section class="section section--alt" id="academia">
+      <div class="container academia">
+        <div class="academia__media reveal">
+          <img id="academia-foto" src="" alt="Profesor guiando a un alumno en press de banca" width="900" height="1100" loading="lazy">
+          <span class="academia__tag" id="academia-nota"></span>
+        </div>
+        <div class="academia__body reveal">
+          <p class="eyebrow">Academia</p>
+          <h2 id="academia-curso"></h2>
+          <p class="academia__inst" id="academia-inst"></p>
+          <ul class="facts" id="academia-facts"></ul>
+          <h3>Temario</h3>
+          <ul class="checklist" id="academia-temario"></ul>
+          <a class="btn btn--primary btn--lg" id="academia-cta" target="_blank" rel="noopener">
+            <svg class="i" aria-hidden="true"><use href="#i-wa"/></svg> <span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Tienda -->
+    <section class="section" id="tienda">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Tienda</p>
+          <h2 data-text="tienda.titulo">Sport Shop</h2>
+          <p data-text="tienda.texto"></p>
+        </header>
+        <div class="grid grid--4" id="tienda-categorias"></div>
+        <div id="catalogo" hidden>
+          <h3 class="catalogo__title">Productos</h3>
+          <div class="chips" id="catalogo-filtros" role="group" aria-label="Filtrar por categoría"></div>
+          <div class="grid grid--4" id="catalogo-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Equipo -->
+    <section class="section section--alt" id="equipo">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Equipo</p>
+          <h2>Quiénes te entrenan</h2>
+          <p data-text="equipoTexto"></p>
+        </header>
+        <div class="grid grid--3 equipo" id="equipo-grid"></div>
+      </div>
+    </section>
+
+    <!-- 8. Galería -->
+    <section class="section" id="galeria">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">El gimnasio</p>
+          <h2>Conocé dónde vas a entrenar</h2>
+        </header>
+        <div class="gallery" id="gallery"></div>
+      </div>
+      <dialog class="lightbox" id="lightbox" aria-label="Foto ampliada">
+        <button class="lightbox__close" data-close aria-label="Cerrar">&times;</button>
+        <button class="lightbox__nav lightbox__nav--prev" data-prev aria-label="Foto anterior">&#8249;</button>
+        <img id="lightbox-img" src="" alt="">
+        <button class="lightbox__nav lightbox__nav--next" data-next aria-label="Foto siguiente">&#8250;</button>
+      </dialog>
+    </section>
+
+    <!-- 9. Testimonios -->
+    <section class="section section--alt" id="testimonios">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="eyebrow">Opiniones</p>
+          <h2>Lo que dicen los socios</h2>
+        </header>
+        <div class="carousel reveal" aria-roledescription="carrusel" aria-label="Opiniones de socios">
+          <div class="carousel__track" id="carousel-track"></div>
+          <div class="carousel__dots" id="carousel-dots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. FAQ -->
+    <section class="section" id="faq">
+      <div class="container container--narrow">
+        <header class="section__head reveal">
+          <p class="eyebrow">Preguntas frecuentes</p>
+          <h2>¿Tenés dudas?</h2>
+        </header>
+        <div class="faq" id="faq-list"></div>
+      </div>
+    </section>
+
+    <!-- 11. Ubicación y horarios -->
+    <section class="section section--alt" id="ubicacion">
+      <div class="container ubicacion">
+        <div class="ubicacion__info reveal">
+          <p class="eyebrow">Ubicación</p>
+          <h2>Estamos en <span data-text="contacto.direccion"></span></h2>
+          <p class="muted" data-text="contacto.direccionDetalle"></p>
+          <div class="horarios" id="horarios">
+            <h3>Horarios</h3>
+            <table>
+              <caption class="sr-only">Horarios de atención</caption>
+              <tbody id="horarios-tabla"></tbody>
+            </table>
+            <p class="muted small">Ambiente climatizado · Entrenamiento personalizado en todos los horarios</p>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn--primary" data-maps target="_blank" rel="noopener">
+              <svg class="i" aria-hidden="true"><use href="#i-pin"/></svg> Cómo llegar
+            </a>
+            <a class="btn btn--ghost" data-wa target="_blank" rel="noopener">Consultá por WhatsApp</a>
+          </div>
+        </div>
+        <div class="map reveal">
+          <iframe id="map" title="Mapa: GIM en Seguí 886, Adrogué" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 12. Footer -->
+  <footer class="footer" id="contacto">
+    <div class="container footer__grid">
+      <div>
+        <a href="#inicio" class="brand" aria-label="GIM – Club Atlético Adrogué, volver al inicio" data-logo></a>
+        <p class="muted">Entrená – Mejorá – Rendí.</p>
+      </div>
+      <div>
+        <h2 class="footer__title">Contacto</h2>
+        <ul class="footer__list">
+          <li><a data-wa target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg> <span data-text="contacto.telefono"></span></a></li>
+          <li><a id="tel"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg> Llamar</a></li>
+          <li><a data-maps target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg> <span data-text="contacto.direccion"></span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer__title">Seguinos</h2>
+        <ul class="footer__list">
+          <li><a id="ig" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-ig"/></svg> <span data-text="contacto.instagramUsuario"></span></a></li>
+          <li><a id="fb" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-fb"/></svg> <span data-text="contacto.facebookNombre"></span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© <span id="year"></span> Gimnasio Club Atlético Adrogué</p>
+      <p>Web hecha por <a href="https://vigolowebstudio.com" target="_blank" rel="noopener">Vigolo Web Studio</a></p>
+    </div>
+  </footer>
+
+  <a class="wa-float" data-wa target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+    <svg aria-hidden="true"><use href="#i-wa"/></svg>
+  </a>
+
+  <!-- Íconos -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.48-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.48.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.93.95-3.48-.22-.36a9.43 9.43 0 1 1 8 4.42zm8.03-17.46A11.32 11.32 0 0 0 12.05.72C5.8.72.7 5.8.7 12.06c0 2 .52 3.95 1.52 5.67L.6 23.6l6.02-1.58a11.32 11.32 0 0 0 5.42 1.38h.01c6.25 0 11.34-5.09 11.34-11.34 0-3.03-1.18-5.88-3.31-8.02z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v7h4v-7h3l.5-4h-3.5V8.8c0-.5.3-.8.8-.8z"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
+  </svg>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
