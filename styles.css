@@ -248,7 +248,7 @@ a.quick__item:hover strong { text-decoration: underline; }
 @media (min-width: 900px) { .ubicacion { grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: stretch; } }
 
 /* Footer */
-.footer { background: #07090b; border-top: 3px solid var(--celeste); padding: 56px 0 96px; }
+.footer { background: #07090b; border-top: 3px solid var(--celeste); padding: 56px 0 160px; }
 .footer__grid { display: grid; gap: 32px; }
 .footer__title { font-size: 1.3rem; }
 .footer__list { display: grid; gap: 4px; }
@@ -276,3 +276,22 @@ a.quick__item:hover strong { text-decoration: underline; }
   .js .reveal { opacity: 1; transform: none; }
 }
 .quote blockquote { margin: 0; }
+
+/* Accesos al sistema de turnos */
+.header__reservar { min-height: 44px; padding: 8px 14px; margin-left: auto; margin-right: 6px; font-size: .95rem; }
+.header__reservar .i { width: 18px; height: 18px; }
+.hide-sm { display: none; }
+.hero__link { display: inline-flex; align-items: center; min-height: 44px; margin-top: 10px; color: #dfe6ec; font-weight: 600; text-underline-offset: 4px; }
+.hero__link:hover { color: var(--celeste); }
+.reserva-float { position: fixed; right: 18px; bottom: 90px; z-index: 60; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 10px 16px; border-radius: 999px; background: rgba(11,13,16,.92); border: 2px solid var(--celeste); color: #fff; font-weight: 600; text-decoration: none; box-shadow: 0 10px 30px -8px rgba(0,0,0,.8); backdrop-filter: blur(8px); transition: transform .2s, background .2s; }
+.reserva-float { opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .25s, transform .25s, background .2s; }
+.reserva-float.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+.reserva-float.is-visible:hover { transform: translateY(-2px); background: #12304a; }
+.reserva-float .i { color: var(--celeste); }
+@media (max-width: 380px) { .header__reservar { padding: 8px 10px; } }
+@media (min-width: 480px) { .hide-sm { display: inline; } }
+@media (min-width: 960px) {
+  .header__reservar { order: 3; margin: 0 0 0 16px; }
+  .nav { margin-left: auto; }
+}
+@media (min-width: 960px) and (max-width: 1199px) { .nav__cta { display: none; } }

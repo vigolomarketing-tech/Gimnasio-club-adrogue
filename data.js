@@ -145,6 +145,116 @@ const CONFIG = {
     { pregunta: "¿Cómo me anoto?", respuesta: "Mandanos un WhatsApp con tu nombre y tu objetivo, y te pasamos toda la info para arrancar.", mensaje: "¡Hola! Quiero anotarme en GIM Adrogué." },
   ],
 
+  // ===================================================================
+  // SISTEMA DE TURNOS (app /app/ y panel /app/admin/)
+  // ===================================================================
+  reservas: {
+    // "local" = demo en el navegador (localStorage). "supabase" = fase 2 (ver supabase/README.md).
+    backend: "local",
+    supabase: { url: "", anonKey: "", workerUrl: "" }, // PENDIENTE CLIENTE (fase 2)
+
+    zonaHoraria: "America/Argentina/Buenos_Aires",
+    anticipacionDias: 14,   // hasta cuántos días para adelante se puede reservar
+    cancelacionHoras: 3,    // no se puede cancelar ni reprogramar si faltan menos de estas horas
+    listaEspera: true,      // si un turno está completo, el socio se puede anotar en espera
+    venceProntoDias: 5,     // a partir de cuántos días antes del vencimiento se marca "vence pronto"
+    recordatorioHorasAntes: 2, // fase 2: recordatorio automático por WhatsApp
+
+    // Horario del gimnasio (0 = domingo ... 6 = sábado). Fuera de esto no se puede reservar.
+    // Se toma de CONFIG.horarios (más arriba) para no duplicarlo.
+
+    // Precios de ejemplo. PENDIENTE CLIENTE: confirmar planes y precios reales.
+    planes: [
+      { id: "libre", nombre: "Pase libre", precio: 38000, dias: 30, reservasSemana: null, detalle: "Todos los días, todas las actividades de sala" },
+      { id: "3x", nombre: "3 veces por semana", precio: 32000, dias: 30, reservasSemana: 3, detalle: "Hasta 3 turnos por semana" },
+      { id: "2x", nombre: "2 veces por semana", precio: 26000, dias: 30, reservasSemana: 2, detalle: "Hasta 2 turnos por semana" },
+      { id: "readaptacion", nombre: "Readaptación", precio: 60000, dias: 30, reservasSemana: 3, detalle: "Readaptación post kinesiológica con seguimiento" },
+    ],
+
+    // PENDIENTE CLIENTE: Camila y Matías son nombres de ejemplo para la demo.
+    profes: [
+      { id: "leandro", nombre: "Lic. Leandro Rey", rol: "Kinesiólogo · Director" },
+      { id: "camila", nombre: "Camila Ferreyra", rol: "Profe de sala y preparación física" }, // EJEMPLO
+      { id: "matias", nombre: "Matías Godoy", rol: "Profe de sala y funcional" }, // EJEMPLO
+    ],
+
+    // Actividades y franjas semanales (plantilla). Desde el panel se pueden editar.
+    // dias: 1 = lunes ... 6 = sábado. cupo = lugares por turno.
+    // profe: profe fijo de la clase. eligeProfe: true = el socio elige con quién.
+    actividades: [
+      {
+        id: "musculacion", corto: "Musculación", nombre: "Musculación", icono: "fuerza", duracion: 60, cupo: 12,
+        descripcion: "Sala de musculación con tu planificación personalizada.",
+        profes: ["camila", "matias"], eligeProfe: false,
+        franjas: [
+          { dias: [1, 2, 3, 4, 5], horas: ["07:30", "08:30", "09:30", "10:30", "11:30", "12:30", "13:30", "14:30", "15:30", "16:30", "17:30", "18:30", "19:30", "20:30"] },
+          { dias: [6], horas: ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"] },
+        ],
+      },
+      {
+        id: "personalizado", corto: "Personalizado", nombre: "Entrenamiento personalizado", icono: "plan", duracion: 60, cupo: 4,
+        descripcion: "Grupo reducido, con un profe al lado en cada ejercicio.",
+        profes: ["camila", "matias", "leandro"], eligeProfe: true,
+        franjas: [
+          { dias: [1, 2, 3, 4, 5], horas: ["08:00", "10:00", "17:00", "18:00", "19:00"] },
+          { dias: [6], horas: ["10:00", "11:00"] },
+        ],
+      },
+      {
+        id: "funcional", corto: "Funcional", nombre: "Funcional", icono: "preparacion", duracion: 50, cupo: 10,
+        descripcion: "Circuitos de fuerza, potencia y resistencia en grupo.",
+        profes: ["matias"], eligeProfe: false,
+        franjas: [
+          { dias: [1, 3, 5], horas: ["09:00", "19:00", "20:00"] },
+          { dias: [6], horas: ["10:00"] },
+        ],
+      },
+      {
+        id: "kinesiologia", corto: "Kinesio", nombre: "Kinesiología / Readaptación", icono: "readaptacion", duracion: 45, cupo: 2,
+        descripcion: "Readaptación post kinesiológica y return to play con el Lic. Rey.",
+        profes: ["leandro"], eligeProfe: false,
+        franjas: [
+          { dias: [2, 4], horas: ["14:00", "15:00", "16:00", "17:00"] },
+        ],
+      },
+      {
+        id: "preparacion", corto: "Prep. física", nombre: "Preparación física", icono: "returnplay", duracion: 60, cupo: 8,
+        descripcion: "Para deportistas: fuerza, velocidad y prevención de lesiones.",
+        profes: ["camila"], eligeProfe: false,
+        franjas: [
+          { dias: [2, 4], horas: ["18:00", "19:00"] },
+          { dias: [6], horas: ["11:00"] },
+        ],
+      },
+    ],
+
+    // Textos de WhatsApp. Variables: {nombre} {plan} {precio} {vence} {actividad} {fecha} {hora} {profe}
+    textos: {
+      renovar: "¡Hola! Soy {nombre}. Quiero renovar mi plan {plan} ({precio}) en GIM Adrogué.",
+      cambiarPlan: "¡Hola! Soy {nombre}. Quiero pasarme al plan {plan} ({precio}) en GIM Adrogué.",
+      avisoReserva: "¡Hola! Soy {nombre}. Reservé {actividad} el {fecha} a las {hora} hs. ¿Me avisan por acá antes del turno?",
+      recordatorio: "¡Hola {nombre}! Te recordamos tu turno de {actividad} hoy a las {hora} hs en GIM Adrogué (Seguí 886). Si no podés venir, cancelalo desde la app así liberás el lugar. ¡Te esperamos!",
+      vencimiento: "¡Hola {nombre}! Tu plan {plan} en GIM Adrogué vence el {vence}. Podés renovarlo por acá o en recepción. ¡Seguimos entrenando!",
+      vencido: "¡Hola {nombre}! Tu plan {plan} en GIM Adrogué venció el {vence}. Renovalo para seguir reservando turnos. ¡Te esperamos!",
+      olvidePin: "¡Hola! No me acuerdo mi PIN de la app de turnos de GIM Adrogué. Mi DNI es ",
+    },
+
+    // Panel del gimnasio. En la demo la clave se valida en el navegador:
+    // NO es seguro para producción (en fase 2 se usa Supabase Auth con rol admin).
+    admin: { claveDemo: "gim2026" },
+
+    // Datos de ejemplo para la demo (fase 1). Se ignoran con backend "supabase".
+    demo: {
+      mostrarAccesos: true, // muestra los socios de prueba en la pantalla de ingreso
+      socios: [
+        { id: "s-martina", nombre: "Martina", apellido: "López", dni: "35123456", whatsapp: "5491155550101", email: "martina@example.com", pin: "1234", plan: "libre", venceEnDias: 18, objetivo: "Ganar fuerza" },
+        { id: "s-lucas", nombre: "Lucas", apellido: "Fernández", dni: "38987654", whatsapp: "5491155550102", email: "lucas@example.com", pin: "2345", plan: "3x", venceEnDias: 3, objetivo: "Rendimiento deportivo" },
+        { id: "s-sofia", nombre: "Sofía", apellido: "Martínez", dni: "41222333", whatsapp: "5491155550103", email: "sofia@example.com", pin: "3456", plan: "readaptacion", venceEnDias: -5, objetivo: "Readaptación de una lesión" },
+      ],
+      cantidadSociosExtra: 230, // socios generados para que la agenda y los reportes tengan volumen
+    },
+  },
+
   seo: {
     // Título, descripción y Open Graph también están escritos en index.html
     // (las redes no leen JavaScript). Si cambiás algo acá, cambialo allá también.

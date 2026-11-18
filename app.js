@@ -213,7 +213,11 @@
 
   // ---------- Header, menú y animaciones ----------
   const header = $("#header"), burger = $("#burger"), nav = $("#nav");
-  const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 40);
+  const flotante = $(".reserva-float");
+  const onScroll = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 40);
+    flotante && flotante.classList.toggle("is-visible", window.scrollY > window.innerHeight * 0.7);
+  };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
   const toggle = (open) => { burger.setAttribute("aria-expanded", open); burger.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú"); nav.classList.toggle("is-open", open); };

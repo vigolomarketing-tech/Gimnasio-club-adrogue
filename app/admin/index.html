@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Panel GIM Adrogué</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="GIM Panel">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../icons/admin-apple-touch-icon.png">
+  <link rel="preload" href="../../fonts/barlow-condensed-latin-800-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/app.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+  <div id="app"><div class="login"><div class="skeleton" style="width:min(90vw,400px);height:280px"></div></div></div>
+  <noscript><p style="padding:24px">El panel necesita JavaScript activado.</p></noscript>
+
+  <script src="../../data.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/api-supabase.js"></script><!-- fase 2: solo actúa si backend = "supabase" -->
+  <script src="../js/ui.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

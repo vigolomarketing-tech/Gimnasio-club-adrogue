@@ -44,8 +44,9 @@
           <li><a href="#ubicacion">Ubicación</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
-        <a class="btn btn--primary nav__cta" data-wa target="_blank" rel="noopener">Escribinos</a>
+        <a class="btn btn--ghost nav__cta" data-wa target="_blank" rel="noopener">Escribinos</a>
       </nav>
+      <a class="btn btn--primary header__reservar" href="app/"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg> <span>Reservar <span class="hide-sm">turno</span></span></a>
       <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
         <span></span><span></span><span></span>
       </button>
@@ -65,11 +66,14 @@
         <p class="hero__sub" data-text="negocio.subtitulo"></p>
         <ul class="badges" id="hero-badges"></ul>
         <div class="hero__ctas">
-          <a class="btn btn--primary btn--lg" data-wa="¡Hola! Quiero probar una clase en GIM Adrogué." target="_blank" rel="noopener">
+          <a class="btn btn--primary btn--lg" href="app/">
+            <svg class="i" aria-hidden="true"><use href="#i-cal"/></svg> Reservar turno
+          </a>
+          <a class="btn btn--ghost btn--lg" data-wa="¡Hola! Quiero probar una clase en GIM Adrogué." target="_blank" rel="noopener">
             <svg class="i" aria-hidden="true"><use href="#i-wa"/></svg> Probá una clase
           </a>
-          <a class="btn btn--ghost btn--lg" href="#entrena">Ver servicios</a>
         </div>
+        <a class="hero__link" href="#entrena">Ver servicios ↓</a>
       </div>
     </section>
 
@@ -254,6 +258,9 @@
     </div>
   </footer>
 
+  <a class="reserva-float" href="app/" aria-label="Reservar turno en la app">
+    <svg class="i" aria-hidden="true"><use href="#i-cal"/></svg><span>Reservar turno</span>
+  </a>
   <a class="wa-float" data-wa target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
     <svg aria-hidden="true"><use href="#i-wa"/></svg>
   </a>
@@ -266,6 +273,7 @@
     <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v7h4v-7h3l.5-4h-3.5V8.8c0-.5.3-.8.8-.8z"/></symbol>
     <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M8 14h3"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
   </svg>
 
